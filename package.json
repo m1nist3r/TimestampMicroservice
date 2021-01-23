@@ -1,7 +1,7 @@
 {
-	"name": "fcc-api-projects-boilerplate",
-	"version": "0.0.1",
-	"description": "An FCC Backend Challenge",
+	"name": "m1nist3r-timestamp-microservice",
+	"version": "1.0.0",
+	"description": "M1nist3r's Timestamp Microservice",
 	"main": "server.js",
 	"scripts": {
 		"start": "node server.js"
@@ -16,9 +16,10 @@
 	},
 	"keywords": [
 		"node",
-		"hyperdev",
+		"timestamp",
 		"express",
-		"freecodecamp"
+		"freecodecamp",
+		"microservice"
 	],
 	"license": "MIT"
 }
