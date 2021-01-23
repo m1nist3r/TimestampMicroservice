@@ -4,7 +4,7 @@
 	"description": "M1nist3r's Timestamp Microservice",
 	"main": "server.js",
 	"scripts": {
-		"start": "node server.js"
+		"start": "node server.js -p 8000"
 	},
 	"dependencies": {
 		"express": "^4.12.4",

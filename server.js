@@ -15,31 +15,54 @@ app.use(express.static('public'));
 
 // http://expressjs.com/en/starter/basic-routing.html
 app.get("/", function (req, res) {
-  res.sendFile(__dirname + '/views/index.html');
+    res.sendFile(__dirname + '/views/index.html');
 });
 
 
 // your first API endpoint...
 app.get("/api/hello", function (req, res) {
-  res.json({greeting: 'hello API'});
+    res.json({greeting: 'hello API'});
 });
 
 // your first API endpoint...
 app.get("/api/timestamp/:date?", function (req, res) {
-  let date = req.params.date;
-  if(date) {
+    let dateString = req.params.date;
+    if (dateString) {
+        let dateNumber = Date.parse(dateString);
+        if (dateNumber) {
+            let date = new Date(dateNumber);
+            if (date instanceof Date && !isNaN(date.getTime())) {
+                res.json({
+                    "unix": dateNumber,
+                    "utc": date.toUTCString(),
+                });
+            }
+            return;
+        }
+        dateNumber = new Date(dateString * 1);
+        if (dateNumber instanceof Date && !isNaN(dateNumber.getTime())) {
+            let date = new Date(dateNumber);
+            res.json({
+                "unix": dateString,
+                "utc": date.toUTCString(),
+            });
+            return;
+        }
 
-  } else {
-    res.json({
-      "unix": Math.floor(new Date().getTime() / 1000),
-      "utc": new Date().toUTCString(),
-    });
-  }
+        res.json({
+            "error": "Invalid Date"
+        });
+
+    } else {
+        res.json({
+            "unix": new Date.now(),
+            "utc": new Date().toUTCString(),
+        });
+    }
 });
-
 
 
 // listen for requests :)
 const listener = app.listen(process.env.PORT, function () {
-  console.log('Your app is listening on port ' + listener.address().port);
+    console.log('Your app is listening on port ' + listener.address().port);
 });
