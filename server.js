@@ -43,7 +43,7 @@ app.get("/api/timestamp/:date?", function (req, res) {
         if (dateNumber instanceof Date && !isNaN(dateNumber.getTime())) {
             let date = new Date(dateNumber);
             res.json({
-                "unix": dateString,
+                "unix": dateNumber.getTime(),
                 "utc": date.toUTCString(),
             });
             return;
@@ -55,7 +55,7 @@ app.get("/api/timestamp/:date?", function (req, res) {
 
     } else {
         res.json({
-            "unix": new Date.now(),
+            "unix": new Date().getTime(),
             "utc": new Date().toUTCString(),
         });
     }
